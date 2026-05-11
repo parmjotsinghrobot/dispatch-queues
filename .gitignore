@@ -1,0 +1,17 @@
+*~
+_*
+*.o
+*.d
+*.asm
+*.sym
+*.img
+.cache/
+compile_commands.json
+*.pdf
+
+num_cores
+test1
+test2
+test3
+test4
+test5
