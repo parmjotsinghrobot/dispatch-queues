@@ -6,12 +6,13 @@
  */
 
 #ifndef DISPATCHQUEUE_H
-#define	DISPATCHQUEUE_H
+    #define	DISPATCHQUEUE_H
 
-#include <pthread.h>
-#include <semaphore.h>
-    
-#define error_exit(MESSAGE)     perror(MESSAGE), exit(EXIT_FAILURE)
+    #include <stdio.h>
+    #include <pthread.h>
+    #include <semaphore.h>
+
+    #define error_exit(MESSAGE)     perror(MESSAGE), exit(EXIT_FAILURE)
 
     typedef enum { // whether dispatching a task synchronously or asynchronously
         ASYNC, SYNC
