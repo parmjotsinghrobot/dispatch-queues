@@ -23,4 +23,4 @@ dispatchQueue.o: dispatchQueue.c dispatchQueue.h
 	gcc -c dispatchQueue.c -std=c99
 
 clean:
-	rm -rf test1 test2 test3 test4 test5 num_cores */*.o
+	rm -rf test1 test2 test3 test4 test5 num_cores *.o
