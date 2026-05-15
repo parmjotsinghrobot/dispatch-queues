@@ -31,6 +31,7 @@
     
     typedef struct dispatch_queue_t dispatch_queue_t; // the dispatch queue type
     typedef struct dispatch_queue_thread_t dispatch_queue_thread_t; // the dispatch queue thread type
+    typedef struct task_node_t task_node_t; // internal task queue node
 
     struct dispatch_queue_thread_t {
         dispatch_queue_t *queue;// the queue this thread is associated with
@@ -41,6 +42,15 @@
 
     struct dispatch_queue_t {
         queue_type_t queue_type;            // the type of queue - serial or concurrent
+        task_node_t *task_list;             // head of linked list of tasks in the queue
+        task_node_t *task_tail;             // tail of linked list of tasks in the queue
+        dispatch_queue_thread_t *threads;   // the threads associated with this queue
+        int num_threads;                    // the number of threads in the queue
+        int active_count;                   // number of active tasks (running or queued)
+        pthread_cond_t queue_cond;          // condition variable to wait for tasks to finish
+        int shutdown;                       // shutdown flag used to stop worker threads
+        pthread_mutex_t queue_mutex;        // the mutex to protect the queue data structure
+        sem_t task_semaphore;               // semaphore used to wake worker threads
     };
     
     task_t *task_create(void (*)(void *), void *, char*);
